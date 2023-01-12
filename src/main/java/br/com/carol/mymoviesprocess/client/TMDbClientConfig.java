@@ -1,9 +1,6 @@
 package br.com.carol.mymoviesprocess.client;
 
-import feign.FeignException;
 import feign.RequestInterceptor;
-import feign.codec.ErrorDecoder;
-import feign.okhttp.OkHttpClient;
 import org.springframework.context.annotation.Bean;
 
 public class TMDbClientConfig {

@@ -13,4 +13,5 @@ feign:
   tmdb-api:
     base-url: ${TMDB_BASE_URL_API:https://api.themoviedb.org/3}
     param:
-      api_key: ${TMDB_BASE_URL_API:''}
+      api_key: ${TMDB_API_KEY:''}
+

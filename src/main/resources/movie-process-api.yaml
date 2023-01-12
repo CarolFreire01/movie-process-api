@@ -1,0 +1,257 @@
+openapi: 3.0.3
+info:
+  title: movie-process-api
+  description: |-
+  termsOfService: http://swagger.io/terms/
+  contact:
+    email: apiteam@swagger.io
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: 1.0.11
+externalDocs:
+  description: Find out more about Swagger
+  url: http://swagger.io
+servers:
+  - url: http://localhost:8080/movie-process-api/
+tags:
+  - name: movie
+    description: Everything about your Pets
+paths:
+  /movie/list:
+    get:
+      tags:
+        - movie
+      summary: Find all movies by pagination
+      description: Return movies
+      operationId: listMovies
+      parameters:
+        - $ref: '#/components/parameters/offset'
+        - $ref: '#/components/parameters/limit'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Movie'          
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Pet'
+        '400':
+          description: Invalid status value
+ 
+  /movie/{movieId}/details:
+    get:
+      tags:
+        - movie
+      summary: Finds movie by id
+      description: Find movie by Id
+      operationId: findMovieById
+      parameters:
+        - $ref: '#/components/parameters/movieId'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MovieDetails'          
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Pet'
+        '400':
+          description: Invalid tag value
+
+
+        
+components:
+  parameters:
+    offset:
+      name: offset
+      in: header
+      description: "Page quantity."
+      required: true
+      schema:
+        type: integer
+        format: int32
+    limit:
+      name: limit
+      in: header
+      description: "Quantity per page."
+      required: true
+      schema:
+        type: integer
+        format: int32
+    movieId:
+      name: movieId
+      in: path
+      description: "Movie Identifier"
+      required: true
+      schema:
+        type: string
+        format: Integer
+        
+  schemas:
+    Movie:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 10
+        isAdult:
+          type: boolean
+          example: false
+        genre: 
+          type: string 
+          example: Ação
+        language:
+          type: string 
+          example: inglês
+        originalTitle:
+          type: string 
+          example: "Puss in Boots: The Last Wish"
+        translateTitle:
+          type: string
+          example: "Gato de Botas 2: O Último Pedido"
+        overviwe:
+          type: string
+          example: "O Gato de Botas descobre que sua paixão pela aventura cobrou seu preço: ele queimou oito de suas nove vidas, deixando-o com apenas uma vida restante. Gato parte em uma jornada épica para encontrar o mítico Último Desejo e restaurar suas nove vidas."
+        posterPath:
+          type: string
+          description: Order Status
+          example: "/65NBNqJiaHeCmqDqkCmrRplJXw.jpg"
+        releaseDate:
+          type: string
+          format: date-time
+          description: Order Status
+          example: "21/12/2022"
+        voteCount: 
+          type: number
+          format: integer
+          example: 1067
+        voteAverage:
+          type: number
+          format: float
+          example: 8.6
+        
+    MovieDetails:
+      allOf:
+        - $ref: '#/components/schemas/Movie'
+        - type: object
+          properties:
+            id:
+              type: integer
+              format: int64
+              example: 100000
+
+
+
+    ApiErrorDto:
+      type: object
+      properties:
+        code:
+          type: string
+          description: 'quicko code'
+        type:
+          type: string
+          description: 'use ErrorTypeEnum values'
+        occurredAt:
+          type: string
+          format: date-time
+          description: 'data error'
+        message:
+          type: string
+          description: 'quicko message error'
+        transactionCode:
+          type: string
+          description: 'provider code'
+        status:
+          type: integer
+          format: int32
+          description: 'http status error'
+        errors:
+          type: array
+          items:
+            type: string
+          example: [ "Resource id 123 not found", "Internal Server Error", "and others..." ]
+
+
+
+          
+  responses:
+    '200':
+      description: Successful Operation
+    '201':
+      description: Created
+      headers:
+        Location:
+          description: Uri to created resource
+          schema:
+            type: string
+    '204':
+      description: No Content
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiErrorDto'
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiErrorDto'
+    '403':
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiErrorDto'
+    '404':
+      description: Resource Not Found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiErrorDto'
+    '405':
+      description: Method Not Allowed
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiErrorDto'
+    '500':
+      description: Internal Server Error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiErrorDto'
+            
+
+  requestBodies:
+    Pet:
+      description: Pet object that needs to be added to the store
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Pet'
+        application/xml:
+          schema:
+            $ref: '#/components/schemas/Pet'
+    UserArray:
+      description: List of user object
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/User'
+  
