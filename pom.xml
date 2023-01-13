@@ -5,17 +5,18 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.0.1</version>
+		<version>2.5.3</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>br.com.carol</groupId>
 	<artifactId>movie-process-api</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.1</version>
 	<name>movie-process-api</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
-		<java.version>17</java.version>
-		<spring-cloud.version>2022.0.0</spring-cloud.version>
+		<java.version>11</java.version>
+		<spring-cloud.version>2020.0.3</spring-cloud.version>
+		<springfox-version>2.9.2</springfox-version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -48,23 +49,35 @@
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
 			<optional>true</optional>
-		</dependency>
-
-		<!-- start | feign dependencies -->
+		</dependency>	<!-- start | swagger and open api -->
 		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-openfeign</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>io.github.openfeign</groupId>
-			<artifactId>feign-okhttp</artifactId>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger2</artifactId>
+			<version>${springfox-version}</version>
 		</dependency>
 		<dependency>
-			<groupId>io.github.openfeign</groupId>
-			<artifactId>feign-httpclient</artifactId>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger-ui</artifactId>
+			<version>${springfox-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.openapitools</groupId>
+			<artifactId>jackson-databind-nullable</artifactId>
+			<version>0.1.0</version>
 		</dependency>
 		<!-- end -->
+
+		<!-- start | validation -->
+		<dependency>
+			<groupId>javax.validation</groupId>
+			<artifactId>validation-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-validation</artifactId>
+		</dependency>
+		<!-- end -->
+
 	</dependencies>
 	<dependencyManagement>
 		<dependencies>
@@ -79,10 +92,49 @@
 	</dependencyManagement>
 
 	<build>
+		<!--		<sourceDirectory>src/main/java</sourceDirectory>-->
+		<finalName>app</finalName>
 		<plugins>
+		<plugin>
+			<groupId>org.openapitools</groupId>
+			<artifactId>openapi-generator-maven-plugin</artifactId>
+			<version>4.3.0</version>
+			<executions>
+				<execution>
+					<goals>
+						<goal>generate</goal>
+					</goals>
+					<configuration>
+						<inputSpec>${project.basedir}/src/main/resources/swagger.yml</inputSpec>
+						<generatorName>spring</generatorName>
+						<library>spring-boot</library>
+						<generateSupportingFiles>false</generateSupportingFiles>
+						<generateModelTests>false</generateModelTests>
+						<apiPackage>br.com.carol.${project.name}.api</apiPackage>
+						<modelPackage>br.com.carol.${project.name}.api.models</modelPackage>
+						<additionalProperties>removeEnumValuePrefix=false</additionalProperties>
+						<configOptions>
+							<additionalModelTypeAnnotations>@lombok.AllArgsConstructor @lombok.NoArgsConstructor</additionalModelTypeAnnotations>
+							<sourceFolder>swagger</sourceFolder>
+							<interfaceOnly>true</interfaceOnly>
+							<java8>false</java8>
+							<dateLibrary>java8</dateLibrary>
+						</configOptions>
+					</configuration>
+				</execution>
+			</executions>
+		</plugin>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<excludes>
+						<exclude>
+							<groupId>org.projectlombok</groupId>
+							<artifactId>lombok</artifactId>
+						</exclude>
+					</excludes>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>

@@ -36,15 +36,10 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Movie'          
-            application/xml:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Pet'
+                  $ref: '#/components/schemas/Movie'
         '400':
           description: Invalid status value
- 
+
   /movie/{movieId}/details:
     get:
       tags:
@@ -60,17 +55,12 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/MovieDetails'          
-            application/xml:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Pet'
+                $ref: '#/components/schemas/MovieDetails'
         '400':
           description: Invalid tag value
 
 
-        
+
 components:
   parameters:
     offset:
@@ -97,7 +87,7 @@ components:
       schema:
         type: string
         format: Integer
-        
+
   schemas:
     Movie:
       type: object
@@ -109,14 +99,13 @@ components:
         isAdult:
           type: boolean
           example: false
-        genre: 
-          type: string 
-          example: Ação
-        language:
-          type: string 
+        genre:
+          $ref: '#/components/schemas/Genre'
+        originalLanguage:
+          type: string
           example: inglês
         originalTitle:
-          type: string 
+          type: string
           example: "Puss in Boots: The Last Wish"
         translateTitle:
           type: string
@@ -133,7 +122,7 @@ components:
           format: date-time
           description: Order Status
           example: "21/12/2022"
-        voteCount: 
+        voteCount:
           type: number
           format: integer
           example: 1067
@@ -141,18 +130,80 @@ components:
           type: number
           format: float
           example: 8.6
-        
+
     MovieDetails:
       allOf:
         - $ref: '#/components/schemas/Movie'
         - type: object
           properties:
-            id:
-              type: integer
-              format: int64
-              example: 100000
+            homepage:
+              type: string
+              format: url
+              example: "www.com.br"
+            status:
+              type: string
+              example: released
+            budget:
+              type: number
+              format: integer
+              example: 9000000
+            imdbId:
+              type: string
+              example: tt1630029
+            productionCompanies:
+              $ref: '#/components/schemas/ProductionCompanies'
+            spokenLanguage:
+              $ref: '#/components/schemas/SpokenLanguage'
 
 
+
+
+
+    Genre:
+      type: array
+      items:
+        type: object
+        properties:
+          id:
+            type: integer
+            format: int64
+            example: 10
+          name:
+            type: string
+            example: ação
+
+    ProductionCompanies:
+      type: array
+      items:
+        type: object
+        properties:
+          id:
+            type: integer
+            format: int64
+            example: 123456
+          logoPath:
+            type: string
+            example: "/iB6GjNVHs5hOqcEYt2rcjBqIjki.png"
+          name:
+            type: string
+            example: "Lightstorm Entertainment"
+          originCountry:
+            $ref: '#/components/schemas/Country'
+
+    SpokenLanguage:
+      type: array
+      items:
+        type: object
+        properties:
+          englishName:
+            type: string
+            example: English
+          iso:
+            type: string
+            example: en
+          name:
+            type: string
+            example: English
 
     ApiErrorDto:
       type: object
@@ -183,9 +234,17 @@ components:
             type: string
           example: [ "Resource id 123 not found", "Internal Server Error", "and others..." ]
 
+    Country:
+      type: string
+      readOnly: false
+      description: country
+      example: US
+      enum:
+        - US
+        - BR
+        - OTHERS
 
 
-          
   responses:
     '200':
       description: Successful Operation
@@ -234,24 +293,5 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ApiErrorDto'
-            
 
-  requestBodies:
-    Pet:
-      description: Pet object that needs to be added to the store
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Pet'
-        application/xml:
-          schema:
-            $ref: '#/components/schemas/Pet'
-    UserArray:
-      description: List of user object
-      content:
-        application/json:
-          schema:
-            type: array
-            items:
-              $ref: '#/components/schemas/User'
   
