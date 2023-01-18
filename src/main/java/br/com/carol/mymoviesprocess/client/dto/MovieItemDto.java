@@ -1,6 +1,8 @@
 package br.com.carol.mymoviesprocess.client.dto;
 
+import br.com.carol.movie_process_api.api.models.MovieDetails;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 import lombok.AllArgsConstructor;
@@ -12,13 +14,13 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class MovieItems {
+public class MovieItemDto {
 
   @JsonProperty("id")
   private Long id;
 
   @JsonProperty("genre_ids")
-  private List<GenreDto> genreId;
+  private List<GenreDto> genre;
 
   @JsonProperty("original_language")
   private String originalLanguage;
@@ -42,8 +44,23 @@ public class MovieItems {
   private double voteAverage;
 
   @JsonProperty("vote_count")
-  private Integer voteCount;
+  private BigDecimal voteCount;
 
   @JsonProperty("adult")
   private boolean adult;
+
+  private MovieItemDto build(MovieDetails movie) {
+    return MovieItemDto.builder()
+        .id(movie.getId())
+        .originalLanguage(movie.getOriginalLanguage())
+        .originalTitle(movie.getOriginalTitle())
+        .overview(movie.getOverview())
+        .posterPath(movie.getPosterPath())
+        .releaseDate(LocalDate.from(movie.getReleaseDate()))
+        .title(movie.getTitle())
+        .voteCount(movie.getVoteCount())
+        .voteAverage(movie.getVoteAverage())
+        .adult(movie.getIsAdult())
+        .build();
+  }
 }

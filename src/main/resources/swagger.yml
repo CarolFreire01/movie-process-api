@@ -104,13 +104,16 @@ components:
         originalLanguage:
           type: string
           example: inglês
+        title:
+          type: string
+          example: "o gato de botas"
         originalTitle:
           type: string
           example: "Puss in Boots: The Last Wish"
         translateTitle:
           type: string
           example: "Gato de Botas 2: O Último Pedido"
-        overviwe:
+        overview:
           type: string
           example: "O Gato de Botas descobre que sua paixão pela aventura cobrou seu preço: ele queimou oito de suas nove vidas, deixando-o com apenas uma vida restante. Gato parte em uma jornada épica para encontrar o mítico Último Desejo e restaurar suas nove vidas."
         posterPath:
@@ -154,10 +157,6 @@ components:
               $ref: '#/components/schemas/ProductionCompanies'
             spokenLanguage:
               $ref: '#/components/schemas/SpokenLanguage'
-
-
-
-
 
     Genre:
       type: array

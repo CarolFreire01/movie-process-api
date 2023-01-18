@@ -2,7 +2,7 @@ package br.com.carol.mymoviesprocess.client;
 
 import br.com.carol.mymoviesprocess.client.dto.GenreDto;
 import br.com.carol.mymoviesprocess.client.dto.MovieDetailsDto;
-import br.com.carol.mymoviesprocess.client.dto.MovieItems;
+import br.com.carol.mymoviesprocess.client.dto.MovieDto;
 import br.com.carol.mymoviesprocess.enums.Language;
 import java.util.List;
 import java.util.UUID;
@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 public interface TMDbClient {
 
   @GetMapping("/movie/popular?api_key={api_key}&language={language}&page={page}")
-  public List<MovieItems> getMovies(@PathVariable("language") Language language,
+  public List<MovieDto> getMovies(@PathVariable("language") Language language,
                                 @PathVariable("page") Integer page,
                                 @PathVariable("api_key") UUID apiKey);
 
