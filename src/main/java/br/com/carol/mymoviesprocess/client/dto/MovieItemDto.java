@@ -1,5 +1,6 @@
 package br.com.carol.mymoviesprocess.client.dto;
 
+import br.com.carol.movie_process_api.api.models.Movie;
 import br.com.carol.movie_process_api.api.models.MovieDetails;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.math.BigDecimal;
@@ -48,19 +49,4 @@ public class MovieItemDto {
 
   @JsonProperty("adult")
   private boolean adult;
-
-  private MovieItemDto build(MovieDetails movie) {
-    return MovieItemDto.builder()
-        .id(movie.getId())
-        .originalLanguage(movie.getOriginalLanguage())
-        .originalTitle(movie.getOriginalTitle())
-        .overview(movie.getOverview())
-        .posterPath(movie.getPosterPath())
-        .releaseDate(LocalDate.from(movie.getReleaseDate()))
-        .title(movie.getTitle())
-        .voteCount(movie.getVoteCount())
-        .voteAverage(movie.getVoteAverage())
-        .adult(movie.getIsAdult())
-        .build();
-  }
 }

@@ -114,7 +114,7 @@
 						<modelPackage>br.com.carol.${project.name}.api.models</modelPackage>
 						<additionalProperties>removeEnumValuePrefix=false</additionalProperties>
 						<configOptions>
-							<additionalModelTypeAnnotations>@lombok.AllArgsConstructor @lombok.NoArgsConstructor</additionalModelTypeAnnotations>
+							<additionalModelTypeAnnotations>@lombok.Builder @lombok.AllArgsConstructor @lombok.NoArgsConstructor</additionalModelTypeAnnotations>
 							<sourceFolder>swagger</sourceFolder>
 							<interfaceOnly>true</interfaceOnly>
 							<java8>false</java8>
