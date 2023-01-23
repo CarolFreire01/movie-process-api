@@ -11,7 +11,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Builder
-public class MovieDto {
+public class MovieDto{
 
   @JsonProperty("page")
   private int page;
@@ -33,7 +33,7 @@ public class MovieDto {
                                                 .voteAverage(movie.getVoteAverage())
                                                 .adult(movie.getIsAdult())
                                                 .build()))
+
         .build();
   }
-
 }
