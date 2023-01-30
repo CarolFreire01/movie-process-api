@@ -11,9 +11,9 @@ import org.springframework.context.annotation.PropertySource;
 public class MyConfig {
 
   @Value("feign.tmdb-api.param.api_key")
-  private UUID apiKey;
+  private String apiKey;
 
-  public UUID getApiKey() {
+  public String getApiKey() {
     return apiKey;
   }
 }

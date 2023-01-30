@@ -3,6 +3,7 @@ package br.com.carol.mymoviesprocess.client.dto;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.OffsetDateTime;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -35,14 +36,18 @@ public class MovieItemDto {
   @JsonProperty("poster_path")
   private String posterPath;
 
+  //** TODO ajustar o releaseDate para o formato brasileiro
   @JsonProperty("release_date")
-  private LocalDate releaseDate;
+  private String releaseDate;
 
   @JsonProperty("title")
   private String title;
 
+  @JsonProperty("translate_title")
+  private String translateTitle;
+
   @JsonProperty("vote_average")
-  private double voteAverage;
+  private float voteAverage;
 
   @JsonProperty("vote_count")
   private BigDecimal voteCount;

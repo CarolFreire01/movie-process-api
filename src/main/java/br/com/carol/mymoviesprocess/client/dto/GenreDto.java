@@ -14,8 +14,4 @@ public class GenreDto {
 
   @JsonProperty("id")
   private Long id;
-
-  @JsonProperty("name")
-  private String name;
-
 }

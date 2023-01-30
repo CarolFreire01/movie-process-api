@@ -27,7 +27,7 @@ paths:
       operationId: listMovies
       parameters:
         - $ref: '#/components/parameters/offset'
-        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/Language'
       responses:
         '200':
           description: successful operation
@@ -88,6 +88,17 @@ components:
         type: string
         format: Integer
 
+    Language:
+      name: language
+      in: header
+      description: language
+      schema:
+        type: string
+        example: PORTUGUES
+        enum:
+          - PORTUGUES
+          - ENGLISH
+
   schemas:
     Movie:
       type: object
@@ -122,7 +133,6 @@ components:
           example: "/65NBNqJiaHeCmqDqkCmrRplJXw.jpg"
         releaseDate:
           type: string
-          format: date-time
           description: Order Status
           example: "21/12/2022"
         voteCount:
@@ -242,6 +252,8 @@ components:
         - US
         - BR
         - OTHERS
+
+
 
 
   responses:
