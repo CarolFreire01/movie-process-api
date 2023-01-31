@@ -23,7 +23,7 @@ public class MovieService {
 
   public List<Movie> findAllMovies(Integer page, String language) {
 
-    MovieDto movies = client.getMovies(Language.valueOf(language).toString(), page, "89e7fa6a8dea2a8f40a9454070990f37");
+    MovieDto movies = client.getMovies(Language.valueOf(language).toString(), page, "");
 
     MovieBuilder movie = new MovieBuilder();
 
