@@ -10,7 +10,7 @@ import org.springframework.context.annotation.PropertySource;
 @PropertySource("classpath:application.yml")
 public class MyConfig {
 
-  @Value("feign.tmdb-api.param.api_key")
+  @Value("${feign.tmdb-api.api-key}")
   private String apiKey;
 
   public String getApiKey() {
