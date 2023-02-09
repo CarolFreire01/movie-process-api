@@ -2,8 +2,6 @@ package br.com.carol.mymoviesprocess.client.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.math.BigDecimal;
-import java.time.LocalDate;
-import java.time.OffsetDateTime;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -16,7 +14,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class MovieItemDto {
+public class MovieItemsDto {
 
   @JsonProperty("id")
   private Long id;

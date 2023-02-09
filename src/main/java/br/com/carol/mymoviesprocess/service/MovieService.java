@@ -2,8 +2,8 @@ package br.com.carol.mymoviesprocess.service;
 
 import br.com.carol.movie_process_api.api.models.Movie;
 import br.com.carol.mymoviesprocess.client.TMDbClient;
-import br.com.carol.mymoviesprocess.client.dto.GenreArray;
-import br.com.carol.mymoviesprocess.client.dto.GenreDto;
+import br.com.carol.mymoviesprocess.client.dto.GenreItemsDto;
+import br.com.carol.mymoviesprocess.client.dto.GenreDetailsDto;
 import br.com.carol.mymoviesprocess.client.dto.MovieDto;
 import br.com.carol.mymoviesprocess.config.MyConfig;
 import br.com.carol.mymoviesprocess.enums.Language;
@@ -19,14 +19,13 @@ public class MovieService {
   private final TMDbClient client;
   private final GenreService genreService;
 
-  /** TODO AJUSTAR O RETORNO PARA FUNCIONAR **/
   public List<Movie> findAllMovies(Integer page, String language) {
 
-    List<GenreArray> genre = genreService.getGenres(language);
+    GenreItemsDto genre = genreService.getGenres(language);
 
     MovieDto getMovies = client.getMovies(Language.valueOf(language).toString(), page, config.getApiKey());
 
-    Movie[] movieList = MovieDto.MovieBuilder(getMovies, genre);
+    Movie[] movieList = MovieDto.MovieBuilder(getMovies, GenreDetailsDto.build(genre));
 
     return List.of(movieList);
   }

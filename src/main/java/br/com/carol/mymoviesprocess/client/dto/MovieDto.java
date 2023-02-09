@@ -21,12 +21,12 @@ public class MovieDto{
   private int page;
 
   @JsonProperty("results")
-  private List<MovieItemDto> movieItemDto;
+  private List<MovieItemsDto> movieItemsDto;
 
-  public static Movie[] MovieBuilder(MovieDto list, List<GenreArray> genreDto) {
+  public static Movie[] MovieBuilder(MovieDto list, List<GenreDetailsDto> genreDto) {
     List<Movie> movies = new ArrayList<>();
 
-    for (MovieItemDto item : list.getMovieItemDto()) {
+    for (MovieItemsDto item : list.getMovieItemsDto()) {
       Movie movie = new Movie();
       movie.setId(item.getId());
       movie.setTitle(item.getTitle());
@@ -38,7 +38,7 @@ public class MovieDto{
       movie.voteCount(item.getVoteCount());
       movie.voteAverage(item.getVoteAverage());
       movie.isAdult(item.isAdult());
-      movie.genre(List.of(GenreDto.convertGenre(item, genreDto)));
+      movie.genre(List.of(GenreDetailsDto.convertGenre(item, genreDto)));
       movies.add(movie);
     }
 
