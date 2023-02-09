@@ -2,7 +2,6 @@ package br.com.carol.mymoviesprocess.client.dto;
 
 import br.com.carol.movie_process_api.api.models.Movie;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.AllArgsConstructor;
@@ -24,7 +23,7 @@ public class MovieDto{
   @JsonProperty("results")
   private List<MovieItemDto> movieItemDto;
 
-  public static Movie[] MovieBuilder(MovieDto list) {
+  public static Movie[] MovieBuilder(MovieDto list, List<GenreArray> genreDto) {
     List<Movie> movies = new ArrayList<>();
 
     for (MovieItemDto item : list.getMovieItemDto()) {
@@ -39,7 +38,7 @@ public class MovieDto{
       movie.voteCount(item.getVoteCount());
       movie.voteAverage(item.getVoteAverage());
       movie.isAdult(item.isAdult());
-      movie.genre(List.of(item.getGenre()));
+      movie.genre(List.of(GenreDto.convertGenre(item, genreDto)));
       movies.add(movie);
     }
 

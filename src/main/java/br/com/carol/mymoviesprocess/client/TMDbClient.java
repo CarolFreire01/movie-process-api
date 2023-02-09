@@ -1,5 +1,6 @@
 package br.com.carol.mymoviesprocess.client;
 
+import br.com.carol.mymoviesprocess.client.dto.GenreArray;
 import br.com.carol.mymoviesprocess.client.dto.GenreDto;
 import br.com.carol.mymoviesprocess.client.dto.MovieDetailsDto;
 import br.com.carol.mymoviesprocess.client.dto.MovieDto;
@@ -24,7 +25,7 @@ public interface TMDbClient {
                                 @PathVariable("api_key") String apiKey);
 
   @GetMapping("/genre/movie/list?api_key={api_key}&language={language}")
-  public List<GenreDto> getGenres(@PathVariable("api_key") UUID apiKey,
+  public List<GenreArray> getGenres(@PathVariable("api_key") String apiKey,
                                   @PathVariable("language") String language);
 
   @GetMapping("movie/{movie_id}?api_key={api_key}&language={language}")
