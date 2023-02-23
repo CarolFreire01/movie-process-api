@@ -1,5 +1,6 @@
 package br.com.carol.mymoviesprocess.client.dto;
 
+import br.com.carol.movie_process_api.api.models.MovieDetails;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.ArrayList;
 import java.util.List;

@@ -15,7 +15,7 @@ import lombok.Setter;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class MovieDto{
+public class MovieDto {
 
   @JsonProperty("page")
   private int page;
@@ -23,7 +23,7 @@ public class MovieDto{
   @JsonProperty("results")
   private List<MovieItemsDto> movieItemsDto;
 
-  public static Movie[] MovieBuilder(MovieDto list, List<GenreDetailsDto> genreDto) {
+  public static Movie[] movieBuilder(MovieDto list, List<GenreDetailsDto> genreDto) {
     List<Movie> movies = new ArrayList<>();
 
     for (MovieItemsDto item : list.getMovieItemsDto()) {

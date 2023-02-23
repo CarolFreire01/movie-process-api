@@ -23,5 +23,4 @@ public class ProductionCompanies {
 
   @JsonProperty("origin_country")
   private String originCountry;
-
 }

@@ -49,6 +49,7 @@ paths:
       operationId: findMovieById
       parameters:
         - $ref: '#/components/parameters/movieId'
+        - $ref: '#/components/parameters/Language'
       responses:
         '200':
           description: successful operation
@@ -85,8 +86,8 @@ components:
       description: "Movie Identifier"
       required: true
       schema:
-        type: string
-        format: Integer
+        type: integer
+        format: int64
 
     Language:
       name: language
@@ -150,6 +151,10 @@ components:
         - type: object
           properties:
             homepage:
+              type: string
+              format: url
+              example: "www.com.br"
+            tagline:
               type: string
               format: url
               example: "www.com.br"

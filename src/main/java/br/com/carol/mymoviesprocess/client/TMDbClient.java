@@ -3,7 +3,6 @@ package br.com.carol.mymoviesprocess.client;
 import br.com.carol.mymoviesprocess.client.dto.GenreItemsDto;
 import br.com.carol.mymoviesprocess.client.dto.MovieDetailsDto;
 import br.com.carol.mymoviesprocess.client.dto.MovieDto;
-import java.util.UUID;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,6 +25,6 @@ public interface TMDbClient {
 
   @GetMapping("movie/{movie_id}?api_key={api_key}&language={language}")
   public MovieDetailsDto getMovieById(@PathVariable("movie_id") Long movieId,
-                                      @PathVariable("api_key") UUID apiKey,
+                                      @PathVariable("api_key") String apiKey,
                                       @PathVariable("language") String language);
 }

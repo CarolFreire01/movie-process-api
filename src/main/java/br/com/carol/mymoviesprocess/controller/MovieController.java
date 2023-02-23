@@ -16,8 +16,9 @@ public class MovieController implements MovieApi {
   private final MovieService service;
 
   @Override
-  public ResponseEntity<MovieDetails> findMovieById(String movieId) {
-    return null;
+  public ResponseEntity<MovieDetails> findMovieById(Long movieId, String language) {
+    MovieDetails movieDetails = service.findMovieById(movieId, language);
+    return ResponseEntity.ok(movieDetails);
   }
 
   @Override
