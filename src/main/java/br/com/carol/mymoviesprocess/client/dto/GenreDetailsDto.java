@@ -1,24 +1,18 @@
 package br.com.carol.mymoviesprocess.client.dto;
 
-import br.com.carol.movie_process_api.api.models.MovieDetails;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
-@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class GenreDetailsDto {
-
-  @JsonProperty("id")
-  private int id;
+public class GenreDetailsDto extends GenreDto{
 
   @JsonProperty("name")
   private String name;
